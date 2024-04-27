@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { ref, get, set, push } from "firebase/database";
 import addition from "../img/addition.png";
 
-export default function Navbar() {
+export default function Navbar({ uid, roomOnClick }) {
     const [userData, setUserData] = useState(null);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState('');
     const navigate = useNavigate();
 
     async function addChatRoom() {
@@ -71,17 +71,16 @@ export default function Navbar() {
                     </div>
                     <div className="pt-5 pl-3">
                         <div className="flex justify-center items-center gap-6">
-                            <p className="info-format">{userData.displayName}</p>
+                            <div className="info-format">{userData.displayName}</div>
                             <button className="font-logout" onClick={() => logOut()}>Log out</button>
                         </div>
                         <p className="flex justify-center items-center info-format">{userData.email}</p>
                     </div>
                 </div>
             )}
-            <div className="">
-                {/* <ChatRoomPreview uid={"-NwUuilzn5hC97QANytz"}/> */}
-                { userData && userData.rooms && userData.rooms.map((chatRoom) => (
-                    <ChatRoomPreview uid={chatRoom} />
+            <div>
+                {userData && userData.rooms && userData.rooms.map((chatRoom) => (
+                    <ChatRoomPreview roomID={chatRoom} roomOnClick={roomOnClick}/>
                 ))}
             </div>
             <div className="absolute bottom-10 flex justify-center items-center">

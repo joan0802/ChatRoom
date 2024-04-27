@@ -9,7 +9,7 @@ export default function ChatRoom({roomID, uid}) {
     const chatRoom = ref(db, `chatRoom/${roomID}`);
 
     return (
-        <div className="flex flex-col w-full bg-main h-screen p-5">
+        <div className="flex flex-col w-3/4 bg-main h-screen p-5">
             {/* <h1>Chat Room</h1> */}
             <div className="flex-grow"></div>
             <div className="self-end w-full">
