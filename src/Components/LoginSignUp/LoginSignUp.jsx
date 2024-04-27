@@ -31,7 +31,8 @@ export default function LoginSignUp() {
                 await set(userRef, {
                     displayName: userName,
                     email: email,
-                    photoURL: photo
+                    photoURL: photo,
+                    rooms: ["-NwUuilzn5hC97QANytz"]
                 })
                 alert('Sign up successfully!');
                 setUserAction('Login');
@@ -71,11 +72,13 @@ export default function LoginSignUp() {
             const user = result.user;
             const userRef = ref(db, 'users/' + user.uid);
             await set(userRef, {
-                displayName: userName,
-                email: email,
-                photoURL: user.photoURL
+                displayName: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL,
+                rooms: ["-NwUuilzn5hC97QANytz"]
             })
             setIsLoggedIn(true);
+            // console.log(user);
         }
         catch (error) {
             alert(error.message);

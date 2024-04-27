@@ -25,6 +25,18 @@
     padding-left: 8px;
     padding-right: 8px;
 }
+.msg-input {
+    background-color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    border-radius: 20px;
+    outline: none;
+    width: 100%;
+    height: 3rem;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
 .info-format {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-weight: 500;
