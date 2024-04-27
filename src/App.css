@@ -55,3 +55,16 @@
 .font-color-1 {
     color: #EEE0C9;
 }
+.font-logout {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    color: #4b5e66;
+    text-decoration: underline;
+}
+.font-chatRoomPreview {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1.1rem;
+    color: #2e3a3f;
+    /* font-weight: 800; */
+}
