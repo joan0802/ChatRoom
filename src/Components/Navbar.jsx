@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { auth, db } from '../firebase/firebase';
+import { auth, db, storage } from '../firebase/firebase';
 import ChatRoomPreview from "./ChatRoomPreview";
 import { useNavigate } from 'react-router-dom';
 import { ref, get, set, push, onValue } from "firebase/database";
 import addition from "../img/addition.png";
+import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
+
 
 export default function Navbar({ uid, roomOnClick }) {
     const [userData, setUserData] = useState(null);
     const [user, setUser] = useState('');
+    const [userPhoto, setUserPhoto] = useState('');
     const navigate = useNavigate();
 
     async function addChatRoom() {
@@ -52,6 +55,29 @@ export default function Navbar({ uid, roomOnClick }) {
         });
     }, []);
 
+    const changeUserPhoto = () => {
+        const fileInput = document.getElementById('file');
+        fileInput.click();
+    }
+
+    const handleFileChange = (e) => {
+        setUserPhoto(e.target.files[0]);
+        uploadPhoto(e.target.files[0]);
+    }
+
+    const uploadPhoto = async (file) => {
+        if (file) {
+            const fileRef = storageRef(storage, `user_photos/${file.name}`);
+            const uploadTask = await uploadBytes(fileRef, file);
+            const newUserPhoto = await getDownloadURL(uploadTask.ref);
+            const userRef = ref(db, 'users/' + user.uid);
+            await set(userRef, {
+                ...userData,
+                photoURL: newUserPhoto
+            });
+        }
+    }
+
     function logOut() {
         auth.signOut().then(() => {
             navigate('/');
@@ -67,7 +93,12 @@ export default function Navbar({ uid, roomOnClick }) {
             {userData && (
                 <div>
                     <div className="flex justify-center items-center">
-                        <img src={userData.photoURL} alt="user" width={100} height={100} className="rounded-full" />
+                        <input type="file" accept="image/*" id="file" className="hidden" onChange={handleFileChange} />
+                        <button onClick={() => changeUserPhoto()}>
+                            <div className="h-24 w-24">
+                                <img src={userData.photoURL} alt="user" className=" rounded-full object-cover h-full w-full" />
+                            </div>
+                        </button>
                     </div>
                     <div className="pt-5 pl-3">
                         <div className="flex justify-center items-center gap-6">
@@ -85,8 +116,6 @@ export default function Navbar({ uid, roomOnClick }) {
                     <ChatRoomPreview roomID={chatRoom} roomOnClick={roomOnClick} />
                 ))}
             </div>
-
-            {/* <div className="flex-grow"></div> */}
 
             <div className="self-end w-full py-4 flex justify-center items-center btn-chatRoomPreview">
                 <div className="">

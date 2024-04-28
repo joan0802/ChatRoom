@@ -4,7 +4,7 @@ import icon from '../../img/favicon.png';
 import './LoginSignUp.css';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../../firebase/firebase';
-import { ref, set } from "firebase/database";
+import { ref, set, get } from "firebase/database";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import photo from "../../img/user.png"
 
@@ -71,12 +71,15 @@ export default function LoginSignUp() {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
             const userRef = ref(db, 'users/' + user.uid);
-            await set(userRef, {
-                displayName: user.displayName,
-                email: user.email,
-                photoURL: user.photoURL,
-                rooms: ["-NwUuilzn5hC97QANytz"]
-            })
+            const snapshot = await get(userRef);
+            if (!snapshot.exists()) {
+                await set(userRef, {
+                    displayName: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL,
+                    rooms: ["-NwUuilzn5hC97QANytz"]
+                })
+            }
             setIsLoggedIn(true);
             // console.log(user);
         }
