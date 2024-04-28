@@ -43,7 +43,7 @@ export default function ChatBox({ roomID, msg, uid }) {
             {(msg.sender === uid) &&
                 <div className="flex justify-end gap-3 py-4">
                     <div>
-                        {user && <div className="">{user.displayName}</div>}
+                        {user && <div className="flex justify-end">{user.displayName}</div>}
                         <div className="bg-card rounded-xl p-2">
                             {msg && <div className="text-[#2e3a3f]">{msg.message}</div>}
                         </div>

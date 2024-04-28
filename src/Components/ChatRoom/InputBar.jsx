@@ -29,7 +29,7 @@ export default function InputBar({ roomID, uid }) {
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
             />
-            <button onClick={sendMessage}>
+            <button onClick={() => sendMessage()} className="btn-input">
                 <img src={send} alt="send" height={51} width={51} className="send-icon" />
             </button>
         </div>

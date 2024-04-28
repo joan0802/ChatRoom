@@ -62,7 +62,7 @@ export default function Navbar({ uid, roomOnClick }) {
     }
 
     return (
-        <div className="flex flex-col bg-card h-screen w-1/4 px-12 py-8 overflow-hidden">
+        <div className="flex flex-col bg-card h-screen w-1/4 md:px-12 md:py-8 px-6 py-4 overflow-hidden">
 
             {userData && (
                 <div>
@@ -72,9 +72,10 @@ export default function Navbar({ uid, roomOnClick }) {
                     <div className="pt-5 pl-3">
                         <div className="flex justify-center items-center gap-6">
                             <div className="info-format">{userData.displayName}</div>
-                            <button className="font-logout" onClick={() => logOut()}>Log out</button>
+                            <button className="font-logout hidden md:flex" onClick={() => logOut()}>Log out</button>
                         </div>
-                        <p className="flex justify-center items-center info-format">{userData.email}</p>
+                        <button className="flex justify-center items-center w-full font-logout md:hidden" onClick={() => logOut()}>Log out</button>
+                        <p className="flex justify-center items-center info-format overflow-hidden hidden sm:flex">{userData.email}</p>
                     </div>
                 </div>
             )}
@@ -87,11 +88,11 @@ export default function Navbar({ uid, roomOnClick }) {
 
             {/* <div className="flex-grow"></div> */}
 
-            <div className="self-end w-full pt-4 justify-center items-center">
+            <div className="self-end w-full py-4 flex justify-center items-center btn-chatRoomPreview">
                 <div className="">
-                    <button className="flex justify-center items-center gap-4 h-1/6" onClick={addChatRoom}>
-                        <img src={addition} width={25} height={25}></img>
-                        <div className="font-chatRoomPreview flex items-center justify-center">Create Chat Room</div>
+                    <button className="flex justify-center items-center gap-4 h-1/6 " onClick={addChatRoom}>
+                        <img src={addition} width={25} height={25} className=""></img>
+                        <div className="font-chatRoomPreview flex items-center justify-center hidden lg:flex">Create Chat Room</div>
                     </button>
                 </div>
             </div>

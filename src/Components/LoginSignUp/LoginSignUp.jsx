@@ -88,7 +88,7 @@ export default function LoginSignUp() {
     return (
         <div className='App bg-main'>
             <div className="bg-main flex min-h-screen items-center justify-center">
-                <div className='w-2/5 h-full bg-white rounded-lg bg-card px-16 pb-16 pt-14 gap-6'>
+                <div className='lg:w-2/5 w-3/5 h-full bg-white rounded-lg bg-card lg:px-16 lg:pb-16 lg:pt-14 px-6 pt-6 pb-8 gap-6'>
                     <div className="flex justify-center">
                         <img src={icon} className="pb-6" alt="logo" width={120} height={120} />
                     </div>
@@ -105,16 +105,18 @@ export default function LoginSignUp() {
                         <div className='info-format'>Password: </div>
                         <input type="password" className='info-input' value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                     </div>
-                    <div className='flex gap-6 pt-2'>
+                    <div className='flex gap-6 pt-2 justify-between'>
                         <button
-                            className={"rounded-lg py-1 px-3 mt-2 " + (userAction === 'Login' ? "font-button-highlight" : "font-button")}
+                            className={"rounded-lg lg:py-1 lg:px-3 lg:mt-2 p-1 btn-input " + (userAction === 'Login' ? "font-button-highlight" : "font-button")}
                             onClick={() => Login()} >
-                            Login
+                            <div className="font-button-text">Login</div>
                         </button>
-                        <button className='rounded-lg py-1 px-3 mt-2 font-button' onClick={() => LoginWithGoogle()}>Login with Google</button>
-                        <button className={"rounded-lg py-1 px-3 mt-2 " + (userAction === "Sign Up" ? "font-button-highlight" : "font-button")}
+                        <button className='rounded-lg lg:py-1 lg:px-3 lg:mt-2 p-1 font-button btn-input' onClick={() => LoginWithGoogle()}>
+                            <div className="font-button-text">Login with Google</div>
+                        </button>
+                        <button className={"rounded-lg lg:py-1 lg:px-3 lg:mt-2 p-1 btn-input " + (userAction === "Sign Up" ? "font-button-highlight" : "font-button")}
                             onClick={() => SignUp()} >
-                            Sign Up
+                            <div className="font-button-text">Sign Up</div>
                         </button>
                     </div>
                 </div>

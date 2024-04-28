@@ -3,6 +3,7 @@ import addUser from "../../img/addUser.png";
 import { useState, useEffect } from "react";
 import { ref, onValue, set, get } from "firebase/database";
 import { db } from "../../firebase/firebase";
+import icon from "../../img/favicon.png";
 
 export default function ChatRoomNav({ roomID }) {
     const [room, setRoom] = useState(null);
@@ -24,6 +25,7 @@ export default function ChatRoomNav({ roomID }) {
                                 ...allUser[user],
                                 rooms: [...allUser[user].rooms, roomID]
                             });
+                            // console.log(updateUserRef);
                             get(roomRef).then((snapshot) => {
                                 const roomData = snapshot.val();
                                 set(roomRef, {
@@ -59,9 +61,12 @@ export default function ChatRoomNav({ roomID }) {
     return (
         <div>
             <nav className="bg-2 p-5 flex justify-between items-center">
-                {room && <div className="font-title">{room.name}</div>}
+                <div className="flex justify-center items-center gap-6">
+                    <img src={icon} width={60} height={60}></img>
+                    {room && <div className="font-title">{room.name}</div>}
+                </div>
                 <div className="flex items-center gap-4">
-                    <button className="bg-2 text-white p-2 rounded-lg" onClick={() => addMember()}>
+                    <button className="bg-2 text-white p-2 rounded-lg btn-input" onClick={() => addMember()}>
                         <img src={addUser} width={35} height={35}></img>
                     </button>
                 </div>

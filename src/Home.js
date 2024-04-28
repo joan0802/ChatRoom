@@ -14,7 +14,7 @@ export default function Home() {
 
     const roomOnClick = (roomID) => {
         setRoom(roomID);
-        console.log(roomID);
+        // console.log(roomID);
     }
 
     useEffect(() => {

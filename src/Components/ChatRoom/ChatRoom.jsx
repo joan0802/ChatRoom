@@ -1,6 +1,6 @@
 import React from "react";
 import InputBar from "./InputBar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ref, onValue } from "firebase/database";
 import { auth, db } from '../../firebase/firebase';
 import ChatRoomNav from "./ChatRoomNav";
@@ -9,14 +9,15 @@ import ChatBox from "./ChatBox";
 export default function ChatRoom({ roomID, uid }) {
 
     const [msgList, setMsgList] = useState([]);
+    const chatContainerRef = useRef(null);
 
     useEffect(() => {
         try {
-            console.log("room = " + roomID);
+            // console.log("room = " + roomID);
             const msgRef = ref(db, `messages/${roomID}`);
             const unsubscribe = onValue(msgRef, (snapshot) => {
                 if (snapshot.exists()) {
-                    const msgData = Object.values(snapshot.val()); // Convert object to array
+                    const msgData = Object.values(snapshot.val()); 
                     setMsgList(msgData);
                 } else {
                     console.log("No data found at messages/" + roomID);
@@ -30,10 +31,16 @@ export default function ChatRoom({ roomID, uid }) {
         }
     }, [roomID]);
 
+    useEffect(() => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [msgList]);
+
     return (
         <div className="flex flex-col w-3/4 bg-main h-screen">
             <ChatRoomNav roomID={roomID} />
-            <div className="flex-grow p-5 overflow-auto">
+            <div ref={chatContainerRef} className="flex-grow p-5 overflow-auto">
                 {msgList && msgList.map((value) => (
                     // console.log(value), 
                     <ChatBox roomID={roomID} msg={value} uid={uid} />
