@@ -7,23 +7,19 @@ import { ref, onValue } from "firebase/database";
 export default function ChatBox({ roomID, msg, uid }) {
     const [user, setUser] = useState(null);
     const [msgText, setMsgText] = useState(msg.message);
-    const [isSame, setIsSame] = useState(false);
 
     useEffect(() => {
         try {
             const userRef = ref(db, `users/${msg.sender}`);
             onValue(userRef, (snapshot) => {
                 setUser(snapshot.val());
-                if (msg.sender == uid) {
-                    setIsSame(true);
-                }
                 // console.log(msg.sender);
                 // console.log(uid);
             });
         } catch (error) {
             console.error('Error fetching messages:', error);
         }
-    }, [roomID]);
+    }, [roomID, msg]);
 
     if (roomID !== msg.roomID) {
         return null;
@@ -31,7 +27,7 @@ export default function ChatBox({ roomID, msg, uid }) {
 
     return (
         <div className="">
-            {!isSame && <div className="flex gap-3 py-4">
+            {!(msg.sender === uid) && <div className="flex gap-3 py-4">
                 <div className="w-14 h-14 rounded-full">
                     {user &&
                         <img className="flex justify-center items-center rounded-full" src={user.photoURL}></img>
@@ -44,7 +40,7 @@ export default function ChatBox({ roomID, msg, uid }) {
                     </div>
                 </div>
             </div>}
-            {isSame &&
+            {(msg.sender === uid) &&
                 <div className="flex justify-end gap-3 py-4">
                     <div>
                         {user && <div className="">{user.displayName}</div>}

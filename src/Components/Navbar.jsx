@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth, db } from '../firebase/firebase';
 import ChatRoomPreview from "./ChatRoomPreview";
 import { useNavigate } from 'react-router-dom';
-import { ref, get, set, push } from "firebase/database";
+import { ref, get, set, push, onValue } from "firebase/database";
 import addition from "../img/addition.png";
 
 export default function Navbar({ uid, roomOnClick }) {
@@ -26,6 +26,10 @@ export default function Navbar({ uid, roomOnClick }) {
                     ...userData,
                     rooms: [...userData.rooms, newChatRoomRef.key]
                 })
+                // setUserData(prevUserData => ({
+                //     ...prevUserData,
+                //     rooms: [...prevUserData.rooms, newChatRoomRef.key]
+                // }));
                 alert('Chat room created successfully!');
             } catch (error) {
                 console.error(error);
@@ -41,13 +45,8 @@ export default function Navbar({ uid, roomOnClick }) {
             else {
                 setUser(user);
                 const userRef = ref(db, 'users/' + user.uid);
-                get(userRef).then((snapshot) => {
-                    if (snapshot.exists())
-                        setUserData(snapshot.val());
-                    else
-                        console.log('data not found');
-                }).catch((error) => {
-                    console.error(error);
+                onValue(userRef, (snapshot) => {
+                    setUserData(snapshot.val());
                 });
             }
         });
@@ -63,7 +62,8 @@ export default function Navbar({ uid, roomOnClick }) {
     }
 
     return (
-        <div className="relative bg-card min-h-screen w-1/4 px-4 py-8">
+        <div className="flex flex-col bg-card h-screen w-1/4 px-12 py-8 overflow-hidden">
+
             {userData && (
                 <div>
                     <div className="flex justify-center items-center">
@@ -78,13 +78,17 @@ export default function Navbar({ uid, roomOnClick }) {
                     </div>
                 </div>
             )}
-            <div>
+
+            <div className="flex-grow overflow-auto">
                 {userData && userData.rooms && userData.rooms.map((chatRoom) => (
                     <ChatRoomPreview roomID={chatRoom} roomOnClick={roomOnClick} />
                 ))}
             </div>
-            <div className="flex justify-center items-center">
-                <div className="absolute bottom-10">
+
+            {/* <div className="flex-grow"></div> */}
+
+            <div className="self-end w-full pt-4 justify-center items-center">
+                <div className="">
                     <button className="flex justify-center items-center gap-4 h-1/6" onClick={addChatRoom}>
                         <img src={addition} width={25} height={25}></img>
                         <div className="font-chatRoomPreview flex items-center justify-center">Create Chat Room</div>
