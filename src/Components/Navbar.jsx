@@ -80,14 +80,16 @@ export default function Navbar({ uid, roomOnClick }) {
             )}
             <div>
                 {userData && userData.rooms && userData.rooms.map((chatRoom) => (
-                    <ChatRoomPreview roomID={chatRoom} roomOnClick={roomOnClick}/>
+                    <ChatRoomPreview roomID={chatRoom} roomOnClick={roomOnClick} />
                 ))}
             </div>
-            <div className="absolute bottom-10 flex justify-center items-center">
-                <button className="flex justify-center items-center gap-4 h-1/6" onClick={addChatRoom}>
-                    <img src={addition} width={25} height={25}></img>
-                    <div className="font-chatRoomPreview flex items-center justify-center">Create Chat Room</div>
-                </button>
+            <div className="flex justify-center items-center">
+                <div className="absolute bottom-10">
+                    <button className="flex justify-center items-center gap-4 h-1/6" onClick={addChatRoom}>
+                        <img src={addition} width={25} height={25}></img>
+                        <div className="font-chatRoomPreview flex items-center justify-center">Create Chat Room</div>
+                    </button>
+                </div>
             </div>
         </div>
     );
