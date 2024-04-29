@@ -4,6 +4,7 @@ import ChatRoomPreview from "./ChatRoomPreview";
 import { useNavigate } from 'react-router-dom';
 import { ref, get, set, push, onValue } from "firebase/database";
 import addition from "../img/addition.png";
+import bell from "../img/bell.png";
 import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
 
 
@@ -78,6 +79,17 @@ export default function Navbar({ uid, roomOnClick }) {
         }
     }
 
+    const showNotification = () => {
+        console.log(Notification.permission)
+        if(Notification.permission === "denied" || Notification.permission === "default") {
+            Notification.requestPermission();
+            console.log("not permitted");
+        }
+        else {
+            new Notification('Notification has been enabled!');
+        }
+    }
+
     function logOut() {
         auth.signOut().then(() => {
             navigate('/');
@@ -88,16 +100,19 @@ export default function Navbar({ uid, roomOnClick }) {
     }
 
     return (
-        <div className="flex flex-col bg-card h-screen w-1/4 md:px-12 md:py-8 px-6 py-4 overflow-hidden">
+        <div className="flex flex-col bg-card h-screen w-1/4 overflow-hidden">
 
             {userData && (
-                <div>
-                    <div className="flex justify-center items-center">
+                <div className="md:px-4 md:py-4 px-4 py-4">
+                    <div className="relative flex justify-center items-center">
                         <input type="file" accept="image/*" id="file" className="hidden" onChange={handleFileChange} />
                         <button onClick={() => changeUserPhoto()}>
                             <div className="h-24 w-24">
                                 <img src={userData.photoURL} alt="user" className=" rounded-full object-cover h-full w-full" />
                             </div>
+                        </button>
+                        <button className="absolute left-2 top-2 btn-input hidden lg:flex" onClick={() => showNotification()}>
+                            <img src={bell} alt="notification" width={30} height={30} className="ml-1 my-1" />
                         </button>
                     </div>
                     <div className="pt-5 pl-3">
@@ -117,7 +132,7 @@ export default function Navbar({ uid, roomOnClick }) {
                 ))}
             </div>
 
-            <div className="self-end w-full py-4 flex justify-center items-center btn-chatRoomPreview">
+            <div className="self-end w-full py-8 flex justify-center items-center btn-chatRoomPreview">
                 <div className="">
                     <button className="flex justify-center items-center gap-4 h-1/6 " onClick={addChatRoom}>
                         <img src={addition} width={25} height={25} className=""></img>

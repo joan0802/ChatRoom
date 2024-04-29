@@ -20,7 +20,7 @@ export default function ChatRoomPreview({ roomID, roomOnClick }) {
 
     return (
         <div>
-            <div className="flex justify-between overflow-hidden btn-chatRoomPreview p-2 hidden lg:flex">
+            <div className="flex justify-between overflow-hidden btn-chatRoomPreview px-10 py-2 hidden lg:flex">
                 <button className="flex items-center gap-4 py-4" onClick={() => roomOnClick(roomID)}>
                     <div className="w-14 h-14 bg-2 p-2 rounded-full"></div>
                     {chatRoomData && <div className="font-chatRoomPreview flex items-center">{chatRoomData.name}</div>}

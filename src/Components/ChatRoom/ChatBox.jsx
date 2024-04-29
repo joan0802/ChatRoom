@@ -1,17 +1,28 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { db } from '../../firebase/firebase';
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, set, remove } from "firebase/database";
+import trash from "../../img/trash.png";
 
 
-export default function ChatBox({ roomID, msg, uid }) {
+export default function ChatBox({ roomID, msg, uid, msgUid }) {
     const [user, setUser] = useState(null);
     const [msgText, setMsgText] = useState(msg.message);
     const [isPhoto, setIsPhoto] = useState(false);
 
+    const deleteMessage = async () => {
+        try {
+            const msgRef = await ref(db, `messages/${roomID}/${msgUid}`);
+            // console.log(msgUid);
+            await remove(msgRef);
+        } catch (error) {
+            console.error("Error deleting message:", error);
+        }
+    };
+
     useEffect(() => {
-        if(msg.isPhoto){
-            console.log("photo");
+        if (msg.isPhoto) {
+            // console.log("photo");
             setIsPhoto(true);
         }
     }, [msg]);
@@ -21,8 +32,6 @@ export default function ChatBox({ roomID, msg, uid }) {
             const userRef = ref(db, `users/${msg.sender}`);
             onValue(userRef, (snapshot) => {
                 setUser(snapshot.val());
-                // console.log(msg.sender);
-                // console.log(uid);
             });
         } catch (error) {
             console.error('Error fetching messages:', error);
@@ -44,7 +53,9 @@ export default function ChatBox({ roomID, msg, uid }) {
                     }
                 </div>
                 <div>
-                    {user && <div className="">{user.displayName}</div>}
+                    <div className="flex justify-between gap-4">
+                        {user && <div className="">{user.displayName}</div>}
+                    </div>
                     <div className="bg-2 rounded-xl p-2">
                         {msg && !isPhoto && <div className="text-[#2e3a3f]">{msg.message}</div>}
                         {msg && isPhoto && <img src={msg.message} className="w-auto h-80"></img>}
@@ -54,7 +65,12 @@ export default function ChatBox({ roomID, msg, uid }) {
             {(msg.sender === uid) &&
                 <div className="flex justify-end gap-3 py-4">
                     <div>
-                        {user && <div className="flex justify-end">{user.displayName}</div>}
+                        <div className="flex justify-between gap-4">
+                            <button onClick={deleteMessage}>
+                                <img src={trash} alt="delete" className="w-4 h-4"></img>
+                            </button>
+                            {user && <div className="flex justify-end">{user.displayName}</div>}
+                        </div>
                         <div className="bg-card rounded-xl p-2">
                             {msg && !isPhoto && <div className="text-[#2e3a3f]">{msg.message}</div>}
                             {msg && isPhoto && <img src={msg.message} className="w-auto h-80"></img>}

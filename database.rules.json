@@ -1,6 +1,28 @@
 {
     "rules": {
-        ".write": "auth.uid != null",
-        ".read": "auth.uid != null"
+        "users": {
+            ".write": "auth.uid != null",
+            ".read": "auth.uid != null",
+            "email": {
+                ".validate": "newData.isString()"
+            }
+        },
+        "messages": {
+            ".write": "auth.uid != null",
+            ".read": "auth.uid != null",
+            "$roomID": {
+                ".write": "auth.uid != null && root.child('chatRooms/' + $roomID + '/users/' + auth.uid).exists()",
+                ".read": "auth.uid != null && root.child('chatRooms/' + $roomID + '/users/' + auth.uid).exists()"
+            }
+        },
+        "chatRooms": {
+            ".read": "auth.uid != null",
+            ".write": "auth.uid != null",
+            "users": {
+                "$uid": {
+                    ".write": "auth.uid != null && $uid === auth.uid"
+                }
+            }
+        }
     }
 }

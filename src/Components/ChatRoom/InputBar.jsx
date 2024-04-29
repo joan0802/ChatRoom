@@ -2,12 +2,13 @@ import React from "react";
 import send from "../../img/send.png";
 import gallery from "../../img/gallery.png";
 import { useState, useEffect } from "react";
-import { db, storage } from "../../firebase/firebase";
-import { ref, push } from "firebase/database";
+import { auth, db, storage } from "../../firebase/firebase";
+import { ref, push, onChildAdded, onChildRemoved, get, limitToLast } from "firebase/database";
 import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
 
 export default function InputBar({ roomID, uid }) {
     const [msg, setMsg] = useState('');
+    const [messages, setMessages] = useState([]);
 
     const handleFileChange = (e) => {
         console.log(e.target.files[0]);
@@ -42,7 +43,7 @@ export default function InputBar({ roomID, uid }) {
         fileInput.click();
     }
 
-    function sendMessage() {
+    const sendMessage = () => {
         if (msg) {
             const msgRef = ref(db, `messages/${roomID}`);
             push(msgRef, {
@@ -50,10 +51,16 @@ export default function InputBar({ roomID, uid }) {
                 message: msg,
                 roomID: roomID
             });
-            console.log(msg);
+            setMessages([uid, msg]);
             setMsg('');
         }
     }
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            sendMessage();
+        }
+    };
 
     return (
         <div className="flex items-center w-full rounded-2xl p-2 gap-4">
@@ -62,6 +69,7 @@ export default function InputBar({ roomID, uid }) {
                 className="flex-grow msg-input"
                 placeholder="Type a message..."
                 value={msg}
+                onKeyDown={handleKeyPress}
                 onChange={(e) => setMsg(e.target.value)}
             />
             <button onClick={() => sendPhoto()} className="btn-input">
