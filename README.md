@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# Chatroom
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to Chatroom! This is a simple web application that allows users to chat in real-time. Below are instructions on how to execute and use this application.
 
-## Available Scripts
+### How to Execute
 
-In the project directory, you can run:
+To run this application locally, follow these steps:
 
-### `npm start`
+1. Clone this repository / Download all source codes to your local machine.
+2. Navigate to the project directory in your terminal.
+3. Run `npm install` to install all dependencies.
+4. Run `npm start` to start the development server.
+5. Open [http://localhost:3000](http://localhost:3000) in your web browser to view the application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Introduction
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Chatroom is a real-time chat application where users can create chat rooms, join existing rooms, and chat with other users in the room. It provides a simple and intuitive interface for seamless communication.
 
-### `npm test`
+### How to use
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+- **Login Page**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Users can choose to login, sign up, or login with Google by clicking the respective buttons on the page.
+![](https://i.imgur.com/Yp4Tr1l.png)
+![](https://i.imgur.com/BnP07Pn.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **ChatRoom Page**
+Here's the chatroom page, there is a default public room which is available for all users.
+![](https://i.imgur.com/dsc58v1.png)
+The chatroom page displays all available chat rooms. Users can click on a room in the navbar to join the conversation.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Create Chat Room
+Users can create private chat rooms and invite friends to join by clicking the "Create Room" button on the navbar.
+![](https://i.imgur.com/VfQsfif.png)
+![](https://i.imgur.com/ylHIGZt.png)
+![](https://i.imgur.com/bUKoor8.png)
+After typing the name of the room, the chat room will be created successfully.
 
-### `npm run eject`
+#### Change User Photo
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Users can change their profile photo by clicking the default user photo on the navbar and selecting a new photo from their device.
+![](https://i.imgur.com/nqRYghR.png)
+![](https://i.imgur.com/W05rdzJ.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Notification
+By clicking the bell icon besides the user profile, it will enable the notification.
+Once granted, users will receive notification when someone text them.
+![](https://i.imgur.com/gifbPZQ.png)
+![](https://i.imgur.com/4gcf8R3.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Send Message & Delete Message
+Users can send messages by typing in the input bar and clicking the send button or pressing Enter on the keyboard.
+![](https://i.imgur.com/sqItPxD.png)
+![](https://i.imgur.com/DZ5QC7F.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Send Photo
+Users can send photos in the chatroom by clicking the picture button.
+![](https://i.imgur.com/DZ5QC7F.png)
+![](https://i.imgur.com/2XQQFzz.png)
+Users can delete a message by clicking the trashcan icon next to the message.
+![](https://i.imgur.com/dc3D9ii.png)
 
-## Learn More
+#### Add people
+Users can add others to the chat room by clicking the "Add People" button on the navbar and entering their email.
+![](https://i.imgur.com/aGVXKqn.png)
+![](https://i.imgur.com/kqPUyxY.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Technologies Used
 
-### Code Splitting
+- **React**: Frontend framework for building the user interface.
+- **Firebase**: Backend service for real-time database, user authentication, and file storage.
+- **Tailwind CSS**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Page link
+https://chatroom-39552.web.app/

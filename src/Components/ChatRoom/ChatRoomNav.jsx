@@ -7,7 +7,6 @@ import icon from "../../img/favicon.png";
 
 export default function ChatRoomNav({ roomID }) {
     const [room, setRoom] = useState(null);
-    const [userData, setUserData] = useState(null);
     const [roomData, setRoomData] = useState(null);
 
     function addMember() {
@@ -27,7 +26,7 @@ export default function ChatRoomNav({ roomID }) {
                             });
                             // console.log(updateUserRef);
                             get(roomRef).then((snapshot) => {
-                                const roomData = snapshot.val();
+                                setRoomData(snapshot.val());
                                 set(roomRef, {
                                     ...roomData,
                                     users: [...roomData.users, user]

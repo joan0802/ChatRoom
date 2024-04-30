@@ -2,12 +2,15 @@
 .bg-main {
     background-color: #F1F0E8;
 }
+
 .bg-2 {
     background-color: #EEE0C9;
 }
+
 .bg-card {
     background-color: #B3C8CF;
 }
+
 .App {
     background-color: #F1F0E8;
 }
@@ -15,7 +18,8 @@
 /* Font style */
 .info-input {
     background-color: #F1F0E8;
-    border: 2px solid #F1F0E8;
+    position: relative;
+    border: 3px solid #F1F0E8;
     border-radius: 5px;
     outline: none;
     margin-bottom: 16px;
@@ -24,10 +28,19 @@
     padding-bottom: 2px;
     padding-left: 8px;
     padding-right: 8px;
+
+    /* border-bottom: 2px solid #ccc; */
+    transition: border-color 0.3s;
 }
+
+.info-input:focus {
+    border-color: #2e3a3f;
+}
+
 .msg-input {
     background-color: #FFFFFF;
-    border: 2px solid #FFFFFF;
+    position: relative;
+    border: transparent;
     border-radius: 20px;
     outline: none;
     width: 100%;
@@ -36,7 +49,15 @@
     padding-bottom: 2px;
     padding-left: 8px;
     padding-right: 8px;
+
+    border: 2px solid #FFFFFF;
+    transition: all 0.3s ease;
 }
+
+.msg-input:focus {
+    border-color: #EEE0C9;
+}
+
 .info-format {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-weight: 500;
@@ -44,12 +65,14 @@
     font-size: 1.3rem;
     color: #2e3a3f;
 }
+
 .font-button {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 1.2rem;
     color: #2e3a3f;
     background-color: #F1F0E8;
 }
+
 .font-button-hightlight {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     transform: scale(1.05);
@@ -58,16 +81,19 @@
     font-weight: 800;
     background-color: #F1F0E8;
 }
+
 .font-button-text {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 1.2rem;
     color: #2e3a3f;
 }
+
 @media (max-width: 768px) {
     .font-button-text {
         font-size: 1rem;
     }
 }
+
 .font-title {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 1.5rem;
@@ -75,9 +101,11 @@
     position: relative;
     font-weight: 800;
 }
+
 .font-color-1 {
     color: #EEE0C9;
 }
+
 .font-logout {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 0.95rem;
@@ -85,6 +113,7 @@
     color: #4b5e66;
     text-decoration: underline;
 }
+
 .font-chatRoomPreview {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 1.1rem;
@@ -109,6 +138,7 @@
     transition: box-shadow 0.2s;
     border-radius: 10px;
 }
+
 .btn-input:hover {
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
