@@ -60,17 +60,13 @@ Users can send messages by typing in the input bar and clicking the send button 
 
 Users can delete a message by clicking the trashcan icon next to the message.
 
-![](https://i.imgur.com/DZ5QC7F.png)
+![](https://i.imgur.com/dc3D9ii.png)
 
 #### Send Photo
 Users can send photos in the chatroom by clicking the picture button.
 
 ![](https://i.imgur.com/DZ5QC7F.png)
 ![](https://i.imgur.com/2XQQFzz.png)
-
-Users can delete a message by clicking the trashcan icon next to the message.
-
-![](https://i.imgur.com/dc3D9ii.png)
 
 #### Add people
 Users can add others to the chat room by clicking the "Add People" button on the navbar and entering their email.

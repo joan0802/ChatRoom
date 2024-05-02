@@ -2,6 +2,7 @@ import React from "react";
 import InputBar from "./InputBar";
 import { useState, useEffect, useRef } from "react";
 import { ref, onValue, onChildAdded, onChildRemoved, get, set } from "firebase/database";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from '../../firebase/firebase';
 import ChatRoomNav from "./ChatRoomNav";
 import ChatBox from "./ChatBox";
@@ -11,6 +12,7 @@ export default function ChatRoom({ roomID, uid }) {
     const [msgList, setMsgList] = useState({});
     const [senderData, setSenderData] = useState({});
     const chatContainerRef = useRef(null);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         try {
@@ -22,6 +24,7 @@ export default function ChatRoom({ roomID, uid }) {
                     setMsgList(msgData);
                     // console.log(msgData);
                 } else {
+                    setMsgList({});
                     console.log("No data found at messages/" + roomID);
                 }
             });
@@ -34,7 +37,13 @@ export default function ChatRoom({ roomID, uid }) {
     }, [roomID]);
 
     useEffect(() => {
-        const user = auth.currentUser;
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser(null);
+            }
+        });
         const messagesRef = ref(db, `messages/${roomID}`);
 
         const notify = async (msg, senderData) => {
@@ -46,7 +55,7 @@ export default function ChatRoom({ roomID, uid }) {
             }
         }
 
-        const unsubscribe = async () => {
+        const handleNewMessage = async () => {
             const snapshot = await get(messagesRef);
             const messages = snapshot.val();
             if (messages) {
@@ -60,6 +69,7 @@ export default function ChatRoom({ roomID, uid }) {
                 }
             }
         };
+        onValue(messagesRef, handleNewMessage);
         return () => unsubscribe();
     }, [msgList]);
 
