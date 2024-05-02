@@ -91,7 +91,7 @@ export default function LoginSignUp() {
     return (
         <div className='App bg-main'>
             <div className="bg-main flex min-h-screen items-center justify-center">
-                <div className='lg:w-2/5 w-3/5 h-full bg-white rounded-lg bg-card lg:px-16 lg:pb-16 lg:pt-14 px-6 pt-6 pb-8 gap-6'>
+                <div className='lg:w-2/5 login-card w-3/5 h-full bg-white rounded-lg bg-card lg:px-16 lg:pb-16 lg:pt-14 px-6 pt-6 pb-8 gap-6'>
                     <div className="flex justify-center">
                         <img src={icon} className="pb-6" alt="logo" width={120} height={120} />
                     </div>

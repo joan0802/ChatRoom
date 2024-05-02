@@ -143,3 +143,32 @@
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
+
+@keyframes borderAnimation {
+    0% {
+        border-color: #eee3d1;
+        box-shadow: 0 0 10px rgba(246, 219, 174, 0.5);
+    }
+    25% {
+        border-color: #f6dbae;
+        box-shadow: 0 0 15px rgba(246, 219, 174, 0.7);
+    }
+    50% {
+        border-color: #f9dca9;
+        box-shadow: 0 0 20px rgba(246, 219, 174, 0.9);
+    }
+    75% {
+        border-color: #f6dbae;
+        box-shadow: 0 0 15px rgba(246, 219, 174, 0.7);
+    }
+    100% {
+        border-color: #eee3d1;
+        box-shadow: 0 0 10px rgba(246, 219, 174, 0.5);
+    }
+}
+
+.login-card {
+    border: 10px solid transparent;
+    border-radius: 30px;
+    animation: borderAnimation 2s infinite;
+}
